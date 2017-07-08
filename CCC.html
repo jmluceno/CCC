@@ -37,41 +37,72 @@
 						c: "blue",
 						colorName: "Blue"
 					}
-				]
-			
+				],
+				otherColors: [
+					{
+						scale: "King",
+						c: "indigo",
+						colorName: "Red"
+					},
+					{
+						scale: "Queen",
+						c: "violet",
+						colorName: "Orange"
+					},
+					{
+						scale: "Emperor",
+						c: "blue",
+						colorName: "Violet"
+					},
+					{
+						scale: "Empress",
+						c: "black",
+						colorName: "Blue"
+					}
+				]			
 		};
 		
 		var App = React.createClass({
-			
+			getInitialState: function() {
+				return {
+					symbol: "colors"
+				};
+			},
+			changeSymbol: function(e) {
+				                            
+				this.setState({
+					symbol: "otherColors"
+				});
+			},
 			render: function() {
-				
 				return(
 					<div>
-						<Output/>
+						<Output symbol={this.state.symbol}/>
+						<button onClick={this.changeSymbol}>change!</button>
 						
 					</div>
 				);
 			}
 		});
 		
-		var Output = React.createClass({
-			
-			
+		var Output = React.createClass({			
 			
 			render: function() {
 				return(
 					<div>
-						<TitleBoxParent/>
-						<ColorBoxParent/>
-						<ColorNameParent/>
+						<TitleBoxParent symbol={this.props.symbol}/>
+						<ColorBoxParent symbol={this.props.symbol}/>
+						<ColorNameParent symbol={this.props.symbol}/>
 					</div>
 				);
 			}
 		});
 		
 		var TitleBoxParent = React.createClass({
-			render: function() {	
-				var titles = data.colors.map(function(color){
+			
+			render: function() {
+				var symbol = this.props.symbol;
+				var titles = data[symbol].map(function(color){
 					return (<TitleBox content={color.scale}/>);
 				});
 				return (<div>{titles}</div>)
@@ -93,11 +124,12 @@
 		});
 		
 		var ColorBoxParent = React.createClass({
-			render: function() {				
+			render: function() {
+				var symbol = this.props.symbol;
 				var boxesStyle = {
 					clear: "both"
 				};
-				var boxes = data.colors.map(function(color){
+				var boxes = data[symbol].map(function(color){
 					return (<ColorBox bgc={color.c}/>);
 				});
 				return (<div style={boxesStyle}>{boxes}</div>)
@@ -122,11 +154,13 @@
 			}
 		});
 		var ColorNameParent = React.createClass({
-			render: function() {				
+
+			render: function() {		
+				var symbol = this.props.symbol;
 				var boxesStyle = {
 					clear: "both"
 				};
-				var boxes = data.colors.map(function(color){
+				var boxes = data[symbol].map(function(color){
 					return (<ColorNameBox content={color.colorName}/>);
 				});
 				return (<div style={boxesStyle}>{boxes}</div>)
@@ -149,21 +183,6 @@
 				);
 			}
 		});
-		
-		/*var ButtonParent = React.createClass({
-			render: function() {
-				var buttonParentStyle = {
-					clear: "both"
-				}
-				return(
-					<div style={buttonParentStyle}>
-						<button>fuck you</button>
-					</div>
-				);
-			}
-		});*/
-		
-		
 		
 		var destination = document.querySelector("#container");
 		ReactDOM.render(
