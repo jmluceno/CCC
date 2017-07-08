@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>Cabalistic Color Coordinator</title>
+  <script src="https://unpkg.com/react@15.3.2/dist/react.js"></script>
+  <script src="https://unpkg.com/react-dom@15.3.2/dist/react-dom.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+   <style>
+    #container {
+      padding: 50px;
+      background-color: #FFF;
+    }
+  </style>
+</head>
+<body>
+	<div id="container"></div>
+	<script type="text/babel">
+		var data = {
+				colors: [
+					{
+						scale: "King",
+						c: "red",
+						colorName: "Red"
+					},
+					{
+						scale: "Queen",
+						c: "orange",
+						colorName: "Orange"
+					},
+					{
+						scale: "Emperor",
+						c: "violet",
+						colorName: "Violet"
+					},
+					{
+						scale: "Empress",
+						c: "blue",
+						colorName: "Blue"
+					}
+				]
+			
+		};
+		
+		var App = React.createClass({
+			
+			render: function() {
+				
+				return(
+					<div>
+						<Output/>
+						
+					</div>
+				);
+			}
+		});
+		
+		var Output = React.createClass({
+			
+			
+			
+			render: function() {
+				return(
+					<div>
+						<TitleBoxParent/>
+						<ColorBoxParent/>
+						<ColorNameParent/>
+					</div>
+				);
+			}
+		});
+		
+		var TitleBoxParent = React.createClass({
+			render: function() {	
+				var titles = data.colors.map(function(color){
+					return (<TitleBox content={color.scale}/>);
+				});
+				return (<div>{titles}</div>)
+				
+			}
+		});
+		var TitleBox = React.createClass({
+			render: function() {
+				var boxStyle = {
+					width: 100,
+					float: "left",
+					marginRight: 20,
+					textAlign: "center"
+				};
+				return (
+					<div style={boxStyle}>{this.props.content}</div>
+				);
+			}
+		});
+		
+		var ColorBoxParent = React.createClass({
+			render: function() {				
+				var boxesStyle = {
+					clear: "both"
+				};
+				var boxes = data.colors.map(function(color){
+					return (<ColorBox bgc={color.c}/>);
+				});
+				return (<div style={boxesStyle}>{boxes}</div>)
+				
+			}
+		});
+		
+		var ColorBox = React.createClass({
+			render: function() {
+				var boxStyle = {
+					width: 100,
+					height: 100,
+					float: "left",
+					marginRight: 20,
+					backgroundColor: this.props.bgc
+				};
+				return (
+					<div style={boxStyle}>
+						
+					</div>
+				);
+			}
+		});
+		var ColorNameParent = React.createClass({
+			render: function() {				
+				var boxesStyle = {
+					clear: "both"
+				};
+				var boxes = data.colors.map(function(color){
+					return (<ColorNameBox content={color.colorName}/>);
+				});
+				return (<div style={boxesStyle}>{boxes}</div>)
+				
+			}
+		});
+		
+		var ColorNameBox = React.createClass({
+			render: function() {
+				var boxStyle = {
+					width: 100,
+					float: "left",
+					marginRight: 20,
+					textAlign: "center"
+				};
+				return (
+					<div style={boxStyle}>
+						{this.props.content}
+					</div>
+				);
+			}
+		});
+		
+		/*var ButtonParent = React.createClass({
+			render: function() {
+				var buttonParentStyle = {
+					clear: "both"
+				}
+				return(
+					<div style={buttonParentStyle}>
+						<button>fuck you</button>
+					</div>
+				);
+			}
+		});*/
+		
+		
+		
+		var destination = document.querySelector("#container");
+		ReactDOM.render(
+		  <App/>,
+		  destination
+		);
+	</script>
+</body>
+</html>
