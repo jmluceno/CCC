@@ -57,6 +57,7 @@
 					{
 						scale: "Empress",
 						c: "#FFF",
+						flecked: ["#FEDD00"],
 						colorName: "White flecked gold"
 					}
 				],
@@ -79,7 +80,8 @@
 					{
 						scale: "Empress",
 						c: "#FFF",
-						colorName: "White, flecked red, blue, and yellow"
+						colorName: "White, flecked red, blue, and yellow",
+						flecked: ["#ed1c24", "#0085ca", "#FEDD00"]
 					}
 				],
 				sphereSaturn: [
@@ -101,6 +103,7 @@
 					{
 						scale: "Empress",
 						c: "#808080",
+						flecked: ["#FDC3C6"],
 						colorName: "Grey flecked pink"
 					}
 				],
@@ -123,6 +126,7 @@
 					{
 						scale: "Empress",
 						c: "#808080",
+						flecked: ["#FEDD00"],
 						colorName: "Grey flecked gold"
 					}
 				],
@@ -145,6 +149,7 @@
 					{
 						scale: "Empress",
 						c: "#1f649a",
+						flecked: ["#FEDD00"],
 						colorName: "Deep azure, flecked yellow"
 					}
 				],
@@ -167,6 +172,7 @@
 					{
 						scale: "Empress",
 						c: "#ed1c24",
+						flecked: ["#000000"],
 						colorName: "Red, flecked black"
 					}
 				],
@@ -211,6 +217,7 @@
 					{
 						scale: "Empress",
 						c: "#8d8800",
+						flecked: ["#FEDD00"],
 						colorName: "Olive, flecked gold"
 					}
 				],
@@ -233,6 +240,7 @@
 					{
 						scale: "Empress",
 						c: "#AD8809",
+						flecked: ["#ffffff"],
 						colorName: "Yellow-brown, flecked white"
 					}
 				],
@@ -255,6 +263,7 @@
 					{
 						scale: "Empress",
 						c: "#dedb2c",
+						flecked: ["#4D91C6"],
 						colorName: "Citrine, flecked azure"
 					}
 				],
@@ -272,6 +281,7 @@
 					{
 						scale: "Emperor",
 						c: "#dedb2c",
+						flecked: ["#FEDD00"],
 						colorName: "As Queen scale, but flecked with gold"
 					},
 					{
@@ -299,6 +309,7 @@
 					{
 						scale: "Empress",
 						c: "#00A550",
+						flecked: ["#FFB000"],
 						colorName: "Emerald, flecked gold"
 					}
 				],
@@ -563,6 +574,7 @@
 					{
 						scale: "Empress",
 						c: "#ffffff",
+						flecked: ["#BB29BB"],
 						colorName: "White, flecked purple, like mother-of-pearl"
 					}
 				],
@@ -685,6 +697,7 @@
 					{
 						scale: "Queen",
 						c: "#D8B998",
+						flecked: ["#F2F2F2"],
 						colorName: "Buff, flecked silver-white"
 					},
 					{
@@ -734,11 +747,13 @@
 					{
 						scale: "Emperor",
 						c: "#ed2000",
+						flecked: ["#FEDD00"],
 						colorName: "Scarlet, flecked gold"
 					},
 					{
 						scale: "Empress",
 						c: "#D9381E",
+						flecked: ["#AE0E36"],
 						colorName: "Vermilion, flecked crimson and emerald"
 					}
 				],
@@ -805,6 +820,7 @@
 					{
 						scale: "Empress",
 						c: "#000000",
+						flecked: ["#FEDD00"],
 						colorName: "Black, flecked yellow"
 					}
 				]
@@ -924,7 +940,11 @@
 					clear: "both"
 				};
 				var boxes = data[symbol].map(function(color){
-					return (<ColorBox bgc={color.c}/>);
+					if (color.flecked) {
+						return (<ColorBox bgc={color.c} flecked={color.flecked}/>);
+					} else {
+						return (<ColorBox bgc={color.c}/>);
+					}
 				});
 				return (<div style={boxesStyle}>{boxes}</div>)
 				
@@ -944,7 +964,62 @@
 				var ctx = this.refs.canvas.getContext('2d');
 				ctx.fillStyle = bgc;
 				ctx.fillRect(0,0, 100, 100);
+				if (this.props.flecked) {
+					this.fleckIt(this.props.flecked);
+				}
 			},
+			
+			fleckIt: function(fleckColor) { //written by Scott Wilde
+				var ctx = this.refs.canvas.getContext('2d');
+				var flecks = [];
+				var maxAngle = (Math.PI*2)/3.9;
+				var minAngle = (Math.PI*2)/6.9;
+				var maxRadius = 1.5;
+				var minRadius = 1;
+
+				//draw 200 pink flecks at 200 random points in the box
+				for (var i = 0; i < 200; i++) {
+
+					// create the fleck and assign center point
+					var fleck = {
+						x: Math.random() * 100,
+						y: Math.random() * 100,
+						points: []
+					};
+					flecks.push(fleck);
+
+					// create the points
+					var angleOffset = Math.random() * (Math.PI*2);
+					var angle = 0;
+
+					// go until we've completed a circle
+					while (angle < (Math.PI*2)) {
+						var radius = Math.random() * (maxRadius - minRadius) + minRadius;
+						var point = {
+							x: Math.cos(angleOffset + angle) * radius,
+							y: Math.sin(angleOffset + angle) * radius
+						};
+						fleck.points.push(point);
+
+						angle += Math.random() * (maxAngle - minAngle) + minAngle;
+					}
+				}
+
+				flecks.forEach(fleck => {
+					var colorIndex = Math.floor(Math.random() * (fleckColor.length));
+					ctx.beginPath();
+					ctx.moveTo(fleck.points[0].x + fleck.x, fleck.points[0].y + fleck.y);
+					for (var j = 1; j < fleck.points.length; j++) {
+						var point = fleck.points[j];
+						ctx.lineTo(point.x + fleck.x, point.y + fleck.y);
+					}
+					ctx.closePath();
+					ctx.fillStyle = fleckColor[colorIndex];
+					ctx.fill();
+				});
+			}, //end fleckIt
+			 
+					
 			render: function() {
 				var boxStyle = {
 					width: 100,
@@ -960,6 +1035,7 @@
 				);
 			}
 		});
+		
 		var ColorNameParent = React.createClass({
 
 			render: function() {		
