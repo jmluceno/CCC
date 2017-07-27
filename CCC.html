@@ -833,7 +833,7 @@
 					<div>
 						<Output symbol={this.state.symbol}/>
 						<div style={inputStyle}>
-							<button onClick={() => this.changeSymbol("start")}>reset</button>
+							<button onClick={() => this.changeSymbol("start")}>Reset</button>
 							<button onClick={() => this.changeSymbol("spherePrimum")}>Primum Mobile</button>
 							<button onClick={() => this.changeSymbol("sphereFixed")}>Fixed Stars</button>
 							<button onClick={() => this.changeSymbol("sphereSaturn")}>Saturn</button>
@@ -879,7 +879,7 @@
 			
 			render: function() {
 				var outputStyle = {
-					height: 200,
+					height: 250,
 					
 				};
 				return(
@@ -932,17 +932,30 @@
 		});
 		
 		var ColorBox = React.createClass({
+			
+			componentDidMount: function () {
+				this.updateCanvas(this.props.bgc);
+				return true;
+			},
+			componentDidUpdate: function () {
+				this.updateCanvas(this.props.bgc);
+			},
+			updateCanvas: function(bgc) {
+				var ctx = this.refs.canvas.getContext('2d');
+				ctx.fillStyle = bgc;
+				ctx.fillRect(0,0, 100, 100);
+			},
 			render: function() {
 				var boxStyle = {
 					width: 100,
 					height: 100,
 					float: "left",
-					marginRight: 20,
-					backgroundColor: this.props.bgc
+					marginRight: 20
 				};
+				
 				return (
 					<div style={boxStyle}>
-						
+						<canvas ref="canvas" width={100} height={100}/>
 					</div>
 				);
 			}
