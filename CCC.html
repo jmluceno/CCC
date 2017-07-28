@@ -275,14 +275,12 @@
 					},
 					{
 						scale: "Queen",
-						c: "#dedb2c",
-						quartered: "", //quartered
+						quartered: ["#dedb2c", "#8d8800", "#731817", "#000000"],
 						colorName: "Citrine, olive, russet, and black"
 					},
 					{
 						scale: "Emperor",
-						c: "#dedb2c",
-						quartered: "", //quartered
+						quartered: ["#dedb2c", "#8d8800", "#731817", "#000000"], 
 						flecked: ["#FEDD00"],
 						colorName: "As Queen scale, but flecked with gold"
 					},
@@ -814,8 +812,8 @@
 				earth: [
 					{
 						scale: "King",
-						c: "#dedb2c",
-						colorName: "Citrine, olive, russet, and black" //quartered
+						quartered: ["#dedb2c", "#8d8800", "#731817", "#000000"],
+						colorName: "Citrine, olive, russet, and black" 
 					},
 					{
 						scale: "Queen",
@@ -870,6 +868,7 @@
 							<button onClick={() => this.changeSymbol("sphereVenus")}>Venus</button>
 							<button onClick={() => this.changeSymbol("sphereMercury")}>Mercury</button>
 							<button onClick={() => this.changeSymbol("sphereLuna")}>Luna</button>
+							<button onClick={() => this.changeSymbol("sphereElements")}>Elements</button>
 							<button onClick={() => this.changeSymbol("air")}>Air</button>						
 							<button onClick={() => this.changeSymbol("mercury")}>Mercury</button>
 							<button onClick={() => this.changeSymbol("luna")}>Luna</button>
@@ -950,7 +949,14 @@
 					clear: "both"
 				};
 				var boxes = data[symbol].map(function(color){
-					if (color.flecked) {
+					if (color.quartered) {
+						if (color.flecked) {
+							return (<ColorBox quartered={color.quartered} flecked={color.flecked}/>);
+						} else {
+							return (<ColorBox quartered={color.quartered}/>);
+						}
+						
+					} else if (color.flecked) {
 						return (<ColorBox bgc={color.c} flecked={color.flecked}/>);
 					} else if (color.rayed) {
 						return (<ColorBox bgc={color.c} rayed={color.rayed}/>);
@@ -976,12 +982,29 @@
 				var ctx = this.refs.canvas.getContext('2d');
 				ctx.fillStyle = bgc;
 				ctx.fillRect(0,0, 100, 100);
-				if (this.props.flecked) {
+				if (this.props.quartered && this.props.flecked) {
+					this.quarterIt(this.props.quartered);
+					this.fleckIt(this.props.flecked);
+				} else if (this.props.quartered) {
+					this.quarterIt(this.props.quartered);
+				} else if (this.props.flecked) {
 					this.fleckIt(this.props.flecked);
 				} else if (this.props.rayed) {
 					this.rayIt(this.props.rayed);
 				}
 			},
+			
+			quarterIt: function(quarterColors) {
+				var ctx = this.refs.canvas.getContext('2d');
+				ctx.fillStyle = quarterColors[0];
+				ctx.fillRect(0,0, 50, 50);
+				ctx.fillStyle = quarterColors[1];
+				ctx.fillRect(50,0, 50, 50);
+				ctx.fillStyle = quarterColors[2];
+				ctx.fillRect(0,50, 50, 50);
+				ctx.fillStyle = quarterColors[3];
+				ctx.fillRect(50,50, 50, 50);				
+			}, 
 			
 			fleckIt: function(fleckColor) { //written by Scott Wilde
 				var ctx = this.refs.canvas.getContext('2d');
