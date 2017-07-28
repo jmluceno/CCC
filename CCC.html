@@ -276,17 +276,20 @@
 					{
 						scale: "Queen",
 						c: "#dedb2c",
+						quartered: "", //quartered
 						colorName: "Citrine, olive, russet, and black"
 					},
 					{
 						scale: "Emperor",
 						c: "#dedb2c",
+						quartered: "", //quartered
 						flecked: ["#FEDD00"],
 						colorName: "As Queen scale, but flecked with gold"
 					},
 					{
 						scale: "Empress",
 						c: "#000000",
+						rayed: "#FEDD00",
 						colorName: "Black rayed with yellow"
 					}
 				],
@@ -332,6 +335,7 @@
 					{
 						scale: "Empress",
 						c: "#001489",
+						rayed: "#440099",
 						colorName: "Indigo, rayed violet"
 					}
 				],
@@ -354,6 +358,7 @@
 					{
 						scale: "Empress",
 						c: "#e8e8e8",
+						rayed: "#8ABAD3",
 						colorName: "Silver, rayed sky blue"
 					}
 				],
@@ -376,6 +381,7 @@
 					{
 						scale: "Empress",
 						c: "#a41247",
+						rayed: "#B2E79F",
 						colorName: "Bright rose or cerise, rayed pale green"
 					}
 				],
@@ -530,6 +536,7 @@
 					{
 						scale: "Empress",
 						c: "#00a8ff",
+						rayed: "#fedd00",
 						colorName: "Bright blue, rayed yellow"
 					}
 				],
@@ -663,6 +670,7 @@
 					{
 						scale: "Empress",
 						c: "#ff0000",
+						rayed: "#4D91C6",
 						colorName: "Bright red, rayed azure or emerald"
 					}
 				],
@@ -730,6 +738,7 @@
 					{
 						scale: "Empress",
 						c: "#ffb734",
+						rayed: "#ed1c24",
 						colorName: "Amber, rayed red"
 					}
 				],
@@ -753,7 +762,7 @@
 					{
 						scale: "Empress",
 						c: "#D9381E",
-						flecked: ["#AE0E36"],
+						flecked: ["#AE0E36", "#00A550"],
 						colorName: "Vermilion, flecked crimson and emerald"
 					}
 				],
@@ -776,6 +785,7 @@
 					{
 						scale: "Empress",
 						c: "#000000",
+						rayed: "#0085ca",
 						colorName: "Black, rayed blue"
 					}
 				],
@@ -793,19 +803,19 @@
 					{
 						scale: "Emperor",
 						c: "#fff",
-						colorName: "The 7 prismatic colours, the violet being outside"
+						colorName: "The 7 prismatic colours, the violet being outside" //prismatic?
 					},
 					{
 						scale: "Empress",
 						c: "#FFF",
-						colorName: "White, red, yellow, blue, black (the latter outside)"
+						colorName: "White, red, yellow, blue, black (the latter outside)" //??
 					}
 				],
 				earth: [
 					{
 						scale: "King",
 						c: "#dedb2c",
-						colorName: "Citrine, olive, russet, and black"
+						colorName: "Citrine, olive, russet, and black" //quartered
 					},
 					{
 						scale: "Queen",
@@ -942,6 +952,8 @@
 				var boxes = data[symbol].map(function(color){
 					if (color.flecked) {
 						return (<ColorBox bgc={color.c} flecked={color.flecked}/>);
+					} else if (color.rayed) {
+						return (<ColorBox bgc={color.c} rayed={color.rayed}/>);
 					} else {
 						return (<ColorBox bgc={color.c}/>);
 					}
@@ -966,6 +978,8 @@
 				ctx.fillRect(0,0, 100, 100);
 				if (this.props.flecked) {
 					this.fleckIt(this.props.flecked);
+				} else if (this.props.rayed) {
+					this.rayIt(this.props.rayed);
 				}
 			},
 			
@@ -1018,6 +1032,38 @@
 					ctx.fill();
 				});
 			}, //end fleckIt
+			
+			rayIt: function(rayColor) {
+				
+				var points = [];
+				var ctx = this.refs.canvas.getContext('2d');
+				
+				var angle = 0,
+					minRadius = 40,
+					maxRadius = 70;
+				
+				while (angle < (Math.PI * 2)) {
+					var radius = Math.floor(Math.random() * (maxRadius - minRadius) + minRadius);
+					var point = {
+						x: Math.cos(angle) * radius + 50,
+						y: Math.sin(angle) * radius + 50
+					}
+					points.push(point);
+					angle += ((Math.PI * 2) / 20);
+				}
+				
+				//draw lines to the points
+				ctx.beginPath();
+				
+				points.forEach(point => {
+					ctx.moveTo(50, 50);
+					ctx.lineTo(point.x, point.y);
+					ctx.closePath();
+					ctx.strokeStyle = rayColor;
+					ctx.stroke();
+					
+				});
+			},
 			 
 					
 			render: function() {
