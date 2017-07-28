@@ -800,13 +800,13 @@
 					},
 					{
 						scale: "Emperor",
-						c: "#fff",
-						colorName: "The 7 prismatic colours, the violet being outside" //prismatic?
+						prismatic: ["#ed1c24","#FF6D00", "#FEDD00", "#00A550", "#0085ca", "#001489", "#440099"],
+						colorName: "The 7 prismatic colours, the violet being outside" 
 					},
 					{
 						scale: "Empress",
-						c: "#FFF",
-						colorName: "White, red, yellow, blue, black (the latter outside)" //??
+						prismatic: ["#ffffff","#ed1c24", "#FEDD00", "#0085ca", "#000000"],
+						colorName: "White, red, yellow, blue, black (the latter outside)" 
 					}
 				],
 				earth: [
@@ -960,6 +960,8 @@
 						return (<ColorBox bgc={color.c} flecked={color.flecked}/>);
 					} else if (color.rayed) {
 						return (<ColorBox bgc={color.c} rayed={color.rayed}/>);
+					} else if (color.prismatic) {
+						return (<ColorBox prismatic={color.prismatic}/>);
 					} else {
 						return (<ColorBox bgc={color.c}/>);
 					}
@@ -989,6 +991,8 @@
 					this.quarterIt(this.props.quartered);
 				} else if (this.props.flecked) {
 					this.fleckIt(this.props.flecked);
+				} else if (this.props.prismatic) {
+					this.prismaticIt(this.props.prismatic);
 				} else if (this.props.rayed) {
 					this.rayIt(this.props.rayed);
 				}
@@ -1086,6 +1090,19 @@
 					ctx.stroke();
 					
 				});
+			},
+			
+			prismaticIt: function(prismaticColors) {
+				var ctx = this.refs.canvas.getContext('2d');
+				var radius = 70;
+				for (var i = prismaticColors.length - 1; i > -1; i--) {
+					ctx.beginPath();
+					ctx.arc(50,50,radius,0,2*Math.PI);
+					ctx.fillStyle = prismaticColors[i];
+					ctx.fill();
+					radius /= 1.4;
+				}
+				
 			},
 			 
 					
