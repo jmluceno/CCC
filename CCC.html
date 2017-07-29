@@ -105,7 +105,7 @@
 								<button style={buttonStyle} onClick={() => this.changeSymbol("Luna")}>~</button>
 								<button style={buttonStyle} onClick={() => this.changeSymbol("Venus")}>2</button>
 								<button style={buttonStyle} onClick={() => this.changeSymbol("Aries")}>!</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("Taurus")}>&</button>
+								<button style={buttonStyle} onClick={() => this.changeSymbol("Taurus")}>=</button>
 								<button style={buttonStyle} onClick={() => this.changeSymbol("Gemini")}>#</button>
 								<button style={buttonStyle} onClick={() => this.changeSymbol("Cancer")}>$</button>
 								<button style={buttonStyle} onClick={() => this.changeSymbol("Leo")}>%</button>
@@ -359,7 +359,7 @@
 				points.forEach(point => {
 					ctx.moveTo(50, 50);
 					ctx.lineTo(point.x, point.y);
-					ctx.closePath();
+					ctx.lineWidth = 2;
 					ctx.strokeStyle = rayColor;
 					ctx.stroke();
 					
@@ -369,12 +369,17 @@
 			prismaticIt: function(prismaticColors) {
 				var ctx = this.refs.canvas.getContext('2d');
 				var radius = 70;
+				if (prismaticColors.length == 7) {
+					var decrease = 10;
+				} else {
+					var decrease = 11.63;
+				}
 				for (var i = prismaticColors.length - 1; i > -1; i--) {
 					ctx.beginPath();
 					ctx.arc(50,50,radius,0,2*Math.PI);
 					ctx.fillStyle = prismaticColors[i];
 					ctx.fill();
-					radius /= 1.4;
+					radius -= decrease;
 				}
 				
 			},
