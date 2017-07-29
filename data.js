@@ -1,5 +1,5 @@
 var data = {
-				start: [
+				"Cabalistic Color Coordinator": [
 					
 					{
 						scale: "King",
@@ -22,7 +22,7 @@ var data = {
 						colorName: ""
 					}
 				],
-				spherePrimum: [
+				"Sphere of the Premum Mobile": [
 					
 					{
 						scale: "King",
@@ -46,7 +46,7 @@ var data = {
 						colorName: "White flecked gold"
 					}
 				],
-				sphereFixed: [
+				"Sphere of the Fixed Stars": [
 					{
 						scale: "King",
 						c: "#8ABAD3",
@@ -69,7 +69,7 @@ var data = {
 						flecked: ["#ed1c24", "#0085ca", "#FEDD00"]
 					}
 				],
-				sphereSaturn: [
+				"Sphere of Saturn": [
 					{
 						scale: "King",
 						c: "#AE0E36",
@@ -92,7 +92,7 @@ var data = {
 						colorName: "Grey flecked pink"
 					}
 				],
-				sphereDaath: [
+				"Sphere of Daath": [
 					{
 						scale: "King",
 						c: "#9A90CD",
@@ -115,7 +115,7 @@ var data = {
 						colorName: "Grey flecked gold"
 					}
 				],
-				sphereJupiter: [
+				"Sphere of Jupiter": [
 					{
 						scale: "King",
 						c: "#2d0066",
@@ -138,7 +138,7 @@ var data = {
 						colorName: "Deep azure, flecked yellow"
 					}
 				],
-				sphereMars: [
+				"Sphere of Mars": [
 					{
 						scale: "King",
 						c: "#FF6D00",
@@ -161,7 +161,7 @@ var data = {
 						colorName: "Red, flecked black"
 					}
 				],
-				sphereSun: [
+				"Sphere of the Sun": [
 					{
 						scale: "King",
 						c: "#FDC3C6",
@@ -183,7 +183,7 @@ var data = {
 						colorName: "Gold amber"
 					}
 				],
-				sphereVenus: [
+				"Sphere of Venus": [
 					{
 						scale: "King",
 						c: "#ffb734",
@@ -206,7 +206,7 @@ var data = {
 						colorName: "Olive, flecked gold"
 					}
 				],
-				sphereMercury: [
+				"Sphere of Mercury": [
 					{
 						scale: "King",
 						c: "#7f14aa",
@@ -229,7 +229,7 @@ var data = {
 						colorName: "Yellow-brown, flecked white"
 					}
 				],
-				sphereLuna: [
+				"Sphere of Luna": [
 					{
 						scale: "King",
 						c: "#001489",
@@ -252,7 +252,7 @@ var data = {
 						colorName: "Citrine, flecked azure"
 					}
 				],
-				sphereElements: [
+				"Sphere of the Elements": [
 					{
 						scale: "King",
 						c: "#FEDD00",
@@ -276,7 +276,7 @@ var data = {
 						colorName: "Black rayed with yellow"
 					}
 				],
-				air: [
+				"Air": [
 					{
 						scale: "King",
 						c: "#fee74d",
@@ -299,7 +299,7 @@ var data = {
 						colorName: "Emerald, flecked gold"
 					}
 				],
-				mercury: [
+				"Mercury": [
 					{
 						scale: "King",
 						c: "#FEDD00",
@@ -322,7 +322,7 @@ var data = {
 						colorName: "Indigo, rayed violet"
 					}
 				],
-				luna: [
+				"Luna": [
 					{
 						scale: "King",
 						c: "#0085ca",
@@ -345,7 +345,7 @@ var data = {
 						colorName: "Silver, rayed sky blue"
 					}
 				],
-				venus: [
+				"Venus": [
 					{
 						scale: "King",
 						c: "#00A550",
@@ -368,7 +368,7 @@ var data = {
 						colorName: "Bright rose or cerise, rayed pale green"
 					}
 				],
-				aries: [
+				"Aries": [
 					{
 						scale: "King",
 						c: "#F2301B",
@@ -390,7 +390,7 @@ var data = {
 						colorName: "Glowing red"
 					}
 				],
-				taurus: [
+				"Taurus": [
 					{
 						scale: "King",
 						c: "#FF4E00",
@@ -412,7 +412,7 @@ var data = {
 						colorName: "Rich brown"
 					}
 				],
-				gemini: [
+				"Gemini": [
 					{
 						scale: "King",
 						c: "#FF6D00",
@@ -434,7 +434,7 @@ var data = {
 						colorName: "Reddish grey inclined to mauve"
 					}
 				],
-				cancer: [
+				"Cancer": [
 					{
 						scale: "King",
 						c: "#ffb734",
@@ -456,7 +456,7 @@ var data = {
 						colorName: "Dark greenish brown"
 					}
 				],
-				leo: [
+				"Leo": [
 					{
 						scale: "King",
 						c: "#E5D708",
@@ -478,7 +478,7 @@ var data = {
 						colorName: "Reddish amber"
 					}
 				],
-				virgo: [
+				"Virgo": [
 					{
 						scale: "King",
 						c: "#59B934",
@@ -500,7 +500,7 @@ var data = {
 						colorName: "Plum colour"
 					}
 				],
-				jupiter: [
+				"Jupiter": [
 					{
 						scale: "King",
 						c: "#7f14aa",
@@ -523,7 +523,7 @@ var data = {
 						colorName: "Bright blue, rayed yellow"
 					}
 				],
-				libra: [
+				"Libra": [
 					{
 						scale: "King",
 						c: "#00A550",
@@ -545,7 +545,7 @@ var data = {
 						colorName: "Pale green"
 					}
 				],
-				water: [
+				"Water": [
 					{
 						scale: "King",
 						c: "#004dab",
@@ -568,7 +568,7 @@ var data = {
 						colorName: "White, flecked purple, like mother-of-pearl"
 					}
 				],
-				scorpio: [
+				"Scorpio": [
 					{
 						scale: "King",
 						c: "#00958d",
@@ -590,7 +590,7 @@ var data = {
 						colorName: "Livid indigo brown (like a black beetle)"
 					}
 				],
-				sagittarius: [
+				"Sagittarius": [
 					{
 						scale: "King",
 						c: "#0085ca",
@@ -612,7 +612,7 @@ var data = {
 						colorName: "Dark vivid blue"
 					}
 				],
-				capricorn: [
+				"Capricorn": [
 					{
 						scale: "King",
 						c: "#001489",
@@ -634,7 +634,7 @@ var data = {
 						colorName: "Cold dark grey, approaching black"
 					}
 				],
-				mars: [
+				"Mars": [
 					{
 						scale: "King",
 						c: "#ed2000",
@@ -657,7 +657,7 @@ var data = {
 						colorName: "Bright red, rayed azure or emerald"
 					}
 				],
-				aquarius: [
+				"Aquarius": [
 					{
 						scale: "King",
 						c: "#440099",
@@ -679,7 +679,7 @@ var data = {
 						colorName: "White tinged purple"
 					}
 				],
-				pisces: [
+				"Pisces": [
 					{
 						scale: "King",
 						c: "#AE0E36",
@@ -702,7 +702,7 @@ var data = {
 						colorName: "Stone color"
 					}
 				],
-				sol: [
+				"Sol": [
 					{
 						scale: "King",
 						c: "#FF6D00",
@@ -725,7 +725,7 @@ var data = {
 						colorName: "Amber, rayed red"
 					}
 				],
-				fire: [
+				"Fire": [
 					{
 						scale: "King",
 						c: "#ff2a00",
@@ -749,7 +749,7 @@ var data = {
 						colorName: "Vermilion, flecked crimson and emerald"
 					}
 				],
-				saturn: [
+				"Saturn": [
 					{
 						scale: "King",
 						c: "#001489",
@@ -772,7 +772,7 @@ var data = {
 						colorName: "Black, rayed blue"
 					}
 				],
-				spirit: [
+				"Spirit": [
 					{
 						scale: "King",
 						merging: ["#FFF", "#808080"],
@@ -794,7 +794,7 @@ var data = {
 						colorName: "White, red, yellow, blue, black (the latter outside)" 
 					}
 				],
-				earth: [
+				"Earth": [
 					{
 						scale: "King",
 						quartered: ["#dedb2c", "#8d8800", "#731817", "#000000"],
