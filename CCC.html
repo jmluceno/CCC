@@ -23,7 +23,6 @@
   <script src="js/data.js"></script>
    <style>
     #container {
-      padding: 50px;
       background-color: #FFF;
 	  font-family: "Vesper Libre";
 	  line-height: 1.2;
@@ -42,7 +41,7 @@
 		var App = React.createClass({
 			getInitialState: function() {
 				return {
-					symbol: "start"
+					symbol: "Cabalistic Color Coordinator"
 				};
 			},
 			changeSymbol: function(value) {
@@ -65,8 +64,8 @@
 				};
 				
 				var buttonStyle = {
-					height: 45,
-					width: 45,
+					height: 50,
+					width: 50,
 					fontSize: 20,
 					textAlign: "center",
 					fontFamily: "Astrological",
@@ -75,10 +74,10 @@
 				};
 				
 				var appStyle = {
-					width: 490,
+					maxWidth: 500,
 					border: "5px solid black",
-					paddingTop: 10,
-					paddingLeft: 10
+					margin: "0 auto 0 auto"
+					
 				};
 				
 				return(
@@ -86,43 +85,43 @@
 						<Output symbol={this.state.symbol}/>
 						<div style={inputStyle}>
 							<div style={titleStyle}>Spheres</div>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("spherePrimum")}>9</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("sphereFixed")}>8</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("sphereSaturn")}>6</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("sphereDaath")}>7</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("sphereJupiter")}>5</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("sphereMars")}>4</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("sphereSun")}>}</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("sphereVenus")}>2</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("sphereMercury")}>1</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("sphereLuna")}>~</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("sphereElements")}>y</button>
+								<button style={buttonStyle} onClick={() => this.changeSymbol("Sphere of the Premum Mobile")}>9</button>
+								<button style={buttonStyle} onClick={() => this.changeSymbol("Sphere of the Fixed Stars")}>8</button>
+								<button style={buttonStyle} onClick={() => this.changeSymbol("Sphere of Saturn")}>6</button>
+								<button style={buttonStyle} onClick={() => this.changeSymbol("Sphere of Daath")}>7</button>
+								<button style={buttonStyle} onClick={() => this.changeSymbol("Sphere of Jupiter")}>5</button>
+								<button style={buttonStyle} onClick={() => this.changeSymbol("Sphere of Mars")}>4</button>
+								<button style={buttonStyle} onClick={() => this.changeSymbol("Sphere of the Sun")}>}</button>
+								<button style={buttonStyle} onClick={() => this.changeSymbol("Sphere of Venus")}>2</button>
+								<button style={buttonStyle} onClick={() => this.changeSymbol("Sphere of Mercury")}>1</button>
+								<button style={buttonStyle} onClick={() => this.changeSymbol("Sphere of Luna")}>~</button>
+								<button style={buttonStyle} onClick={() => this.changeSymbol("Sphere of the Elements")}>y</button>
 							<div style={titleStyle}>Elements</div>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("air")}>q</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("water")}>w</button>							
-								<button style={buttonStyle} onClick={() => this.changeSymbol("fire")}>e</button>
+								<button style={buttonStyle} onClick={() => this.changeSymbol("Air")}>q</button>
+								<button style={buttonStyle} onClick={() => this.changeSymbol("Water")}>w</button>							
+								<button style={buttonStyle} onClick={() => this.changeSymbol("Fire")}>e</button>
 							<div style={titleStyle}>Paths</div>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("mercury")}>1</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("luna")}>~</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("venus")}>2</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("aries")}>!</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("taurus")}>&</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("gemini")}>#</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("cancer")}>$</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("leo")}>%</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("virgo")}>^</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("jupiter")}>5</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("libra")}>&</button>							
-								<button style={buttonStyle} onClick={() => this.changeSymbol("scorpio")}>*</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("sagittarius")}>(</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("capricorn")}>)</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("mars")}>4</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("aquarius")}>_</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("pisces")}>+</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("sol")}>}</button>							
-								<button style={buttonStyle} onClick={() => this.changeSymbol("saturn")}>6</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("spirit")}>t</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("earth")}>y</button>
+								<button style={buttonStyle} onClick={() => this.changeSymbol("Mercury")}>1</button>
+								<button style={buttonStyle} onClick={() => this.changeSymbol("Luna")}>~</button>
+								<button style={buttonStyle} onClick={() => this.changeSymbol("Venus")}>2</button>
+								<button style={buttonStyle} onClick={() => this.changeSymbol("Aries")}>!</button>
+								<button style={buttonStyle} onClick={() => this.changeSymbol("Taurus")}>&</button>
+								<button style={buttonStyle} onClick={() => this.changeSymbol("Gemini")}>#</button>
+								<button style={buttonStyle} onClick={() => this.changeSymbol("Cancer")}>$</button>
+								<button style={buttonStyle} onClick={() => this.changeSymbol("Leo")}>%</button>
+								<button style={buttonStyle} onClick={() => this.changeSymbol("Virgo")}>^</button>
+								<button style={buttonStyle} onClick={() => this.changeSymbol("Jupiter")}>5</button>
+								<button style={buttonStyle} onClick={() => this.changeSymbol("Libra")}>&</button>							
+								<button style={buttonStyle} onClick={() => this.changeSymbol("Scorpio")}>*</button>
+								<button style={buttonStyle} onClick={() => this.changeSymbol("Sagittarius")}>(</button>
+								<button style={buttonStyle} onClick={() => this.changeSymbol("Capricorn")}>)</button>
+								<button style={buttonStyle} onClick={() => this.changeSymbol("Mars")}>4</button>
+								<button style={buttonStyle} onClick={() => this.changeSymbol("Aquarius")}>_</button>
+								<button style={buttonStyle} onClick={() => this.changeSymbol("Pisces")}>+</button>
+								<button style={buttonStyle} onClick={() => this.changeSymbol("Sol")}>}</button>							
+								<button style={buttonStyle} onClick={() => this.changeSymbol("Saturn")}>6</button>
+								<button style={buttonStyle} onClick={() => this.changeSymbol("Spirit")}>t</button>
+								<button style={buttonStyle} onClick={() => this.changeSymbol("Earth")}>y</button>
 						</div>
 					</div>
 				);
@@ -134,77 +133,108 @@
 			
 			render: function() {
 				var outputStyle = {
-					height: 250
+					height: 280, 
+					width: "100%"
 					
 				};
 				return(
 					<div style={outputStyle}>
-						<TitleBoxParent symbol={this.props.symbol}/>
+						<TitleBox symbol={this.props.symbol}/>
 						<ColorBoxParent symbol={this.props.symbol}/>
-						<ColorNameParent symbol={this.props.symbol}/>
 					</div>
 				);
 			}
 		});
-				
-		var TitleBoxParent = React.createClass({
-			
-			render: function() {
-				var symbol = this.props.symbol;
-				var titles = data[symbol].map(function(color){
-					return (<TitleBox content={color.scale}/>);
-				});
-				return (<div>{titles}</div>)
-				
-			}
-		});
+		
 		var TitleBox = React.createClass({
 			render: function() {
-				var boxStyle = {
-					width: 100,
-					float: "left",
-					marginRight: 20,
-					textAlign: "center"
+				var titleBoxStyle = {
+					width: "100%",
+					backgroundColor: "#000",
+					color: "#FFF",
+					textAlign: "center",
+					fontSize: 28,
+					paddingTop: 15,
+					paddingBottom: 15,
+					textTransform: "uppercase"
 				};
-				return (
-					<div style={boxStyle}>{this.props.content}</div>
-				);
+				return (<div style={titleBoxStyle}>{this.props.symbol}</div>);
 			}
 		});
+		
+		
 		
 		var ColorBoxParent = React.createClass({
 			render: function() {
 				var symbol = this.props.symbol;
-				var boxesStyle = {
-					clear: "both"
-				};
-				var boxes = data[symbol].map(function(color){
-					if (color.quartered) {
-						if (color.flecked) {
-							return (<ColorBox quartered={color.quartered} flecked={color.flecked}/>);
-						} else {
-							return (<ColorBox quartered={color.quartered}/>);
-						}
-						
-					} else if (color.flecked) {
-						return (<ColorBox bgc={color.c} flecked={color.flecked}/>);
-					} else if (color.rayed) {
-						return (<ColorBox bgc={color.c} rayed={color.rayed}/>);
-					} else if (color.prismatic) {
-						return (<ColorBox prismatic={color.prismatic}/>);
-					} else if (color.merging) {
-						return (<ColorBox merging={color.merging}/>);
-					} else {
-						return (<ColorBox bgc={color.c}/>);
-					}
+				var colorBoxParentStyle = {
+					width: "100%",
+					paddingLeft: 18,
+					paddingTop: 10
+				}
+				var boxes = data[symbol].map(function(colorDataObject){
+					return(<ColorBox data={colorDataObject}/>);
 				});
-				return (<div style={boxesStyle}>{boxes}</div>)
-				
+				return (
+					<div style={colorBoxParentStyle}>{boxes}</div>
+				);
 			}
 		});
 		
-		var ColorBox = React.createClass({
+		var ColorBox = React.createClass({			
+			render: function() {
+				var colorDataObject = this.props.data;
+				var canvasBox;
+				var colorBoxStyle = {
+					width: 100,
+					float: "left",
+					marginRight: 20,
+				}
 			
+				if (colorDataObject.quartered) {
+					if (colorDataObject.flecked) {
+						canvasBox = <MakeCanvasBox quartered={colorDataObject.quartered} flecked={colorDataObject.flecked}/>;
+					} else {
+						canvasBox = <MakeCanvasBox quartered={colorDataObject.quartered}/>;
+					}			
+				} else if (colorDataObject.flecked) {
+					canvasBox = <MakeCanvasBox bgc={colorDataObject.c} flecked={colorDataObject.flecked}/>;
+				} else if (colorDataObject.rayed) {
+					canvasBox = <MakeCanvasBox bgc={colorDataObject.c} rayed={colorDataObject.rayed}/>;
+				} else if (colorDataObject.prismatic) {
+					canvasBox = <MakeCanvasBox prismatic={colorDataObject.prismatic}/>;
+				} else if (colorDataObject.merging) {
+					canvasBox = <MakeCanvasBox merging={colorDataObject.merging}/>;
+				} else {
+					canvasBox = <MakeCanvasBox bgc={colorDataObject.c}/>;
+				}
+				return (
+					<div style={colorBoxStyle}>
+						<ScaleName name={colorDataObject.scale}/>
+						<div>{canvasBox}</div>
+						<ColorName name={colorDataObject.colorName}/>
+					</div>
+				);
+			}
+		});		
+		
+		var ScaleName = React.createClass({
+			render: function() {
+				var boxStyle = {
+					width: 100,
+					textAlign: "center",
+					fontSize: 18,
+					textTransform: "uppercase"
+				};
+				return (
+					<div style={boxStyle}>
+						{this.props.name}
+					</div>
+				);
+			}
+		});
+		
+		var MakeCanvasBox = React.createClass({
 			componentDidMount: function () {
 				this.updateCanvas(this.props.bgc);
 				return true;
@@ -348,15 +378,13 @@
 				}
 				
 			},
-			 
-					
+			 				
 			render: function() {
 				var boxStyle = {
 					width: 100,
 					height: 100,
-					float: "left",
-					marginRight: 15,
-					border: "2px solid black"
+					border: "2px solid black",
+					marginBottom: 10
 				};
 				
 				return (
@@ -367,32 +395,16 @@
 			}
 		});
 		
-		var ColorNameParent = React.createClass({
-
-			render: function() {		
-				var symbol = this.props.symbol;
-				var boxesStyle = {
-					clear: "both"
-				};
-				var boxes = data[symbol].map(function(color){
-					return (<ColorNameBox content={color.colorName}/>);
-				});
-				return (<div style={boxesStyle}>{boxes}</div>)
-				
-			}
-		});
-		
-		var ColorNameBox = React.createClass({
+		var ColorName = React.createClass({
 			render: function() {
 				var boxStyle = {
 					width: 100,
-					float: "left",
-					marginRight: 20,
-					textAlign: "center"
+					textAlign: "center",
+					fontSize: 16
 				};
 				return (
 					<div style={boxStyle}>
-						{this.props.content}
+						{this.props.name}
 					</div>
 				);
 			}
