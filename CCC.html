@@ -46,88 +46,35 @@
 			},
 			changeSymbol: function(value) {
 				this.setState({
-					symbol: value
+					symbol: value,
+					bkgdClr: "#fff"
+				});
+			},
+			
+			handler: function(e) {
+				this.setState({
+					bkgdClr: e
 				});
 			},
 			
 			render: function() {
-				var inputStyle = {
-					float: "none",
-					margin: 10
-				};
 				
-				var titleStyle = {
-					textAlign: "center",
-					fontSize: 20,
-					textTransform: "uppercase"
-
-				};
-				
-				var buttonStyle = {
-					height: 50,
-					width: 50,
-					fontSize: 20,
-					textAlign: "center",
-					fontFamily: "Astrological",
-					marginRight: 10,
-					marginBottom: 10
-				};
 				
 				var appStyle = {
 					maxWidth: 500,
 					border: "5px solid black",
-					margin: "0 auto 0 auto"
-					
+					margin: "0 auto 0 auto",
+					backgroundColor: this.state.bkgdClr
 				};
 				
 				return(
 					<div style={appStyle}>
 						<Output symbol={this.state.symbol}/>
-						<div style={inputStyle}>
-							<div style={titleStyle}>Spheres</div>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("Sphere of the Premum Mobile")}>9</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("Sphere of the Fixed Stars")}>8</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("Sphere of Saturn")}>6</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("Sphere of Daath")}>7</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("Sphere of Jupiter")}>5</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("Sphere of Mars")}>4</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("Sphere of the Sun")}>}</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("Sphere of Venus")}>2</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("Sphere of Mercury")}>1</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("Sphere of Luna")}>~</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("Sphere of the Elements")}>y</button>
-							<div style={titleStyle}>Elements</div>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("Air")}>q</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("Water")}>w</button>							
-								<button style={buttonStyle} onClick={() => this.changeSymbol("Fire")}>e</button>
-							<div style={titleStyle}>Paths</div>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("Mercury")}>1</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("Luna")}>~</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("Venus")}>2</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("Aries")}>!</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("Taurus")}>=</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("Gemini")}>#</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("Cancer")}>$</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("Leo")}>%</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("Virgo")}>^</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("Jupiter")}>5</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("Libra")}>&</button>							
-								<button style={buttonStyle} onClick={() => this.changeSymbol("Scorpio")}>*</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("Sagittarius")}>(</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("Capricorn")}>)</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("Mars")}>4</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("Aquarius")}>_</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("Pisces")}>+</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("Sol")}>}</button>							
-								<button style={buttonStyle} onClick={() => this.changeSymbol("Saturn")}>6</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("Spirit")}>t</button>
-								<button style={buttonStyle} onClick={() => this.changeSymbol("Earth")}>y</button>
-						</div>
+						<Input inputHandler={this.changeSymbol}/>
 					</div>
 				);
 			}
 		});
-		
 		
 		var Output = React.createClass({			
 			
@@ -406,6 +353,74 @@
 					<div style={boxStyle}>
 						{this.props.name}
 					</div>
+				);
+			}
+		});
+		
+		var Input = React.createClass({
+			render() {
+				var inputStyle = {
+					float: "none",
+					margin: 10
+				};
+				
+				var titleStyle = {
+					textAlign: "center",
+					fontSize: 20,
+					textTransform: "uppercase"
+
+				};
+				
+				var buttonStyle = {
+					height: 50,
+					width: 50,
+					fontSize: 20,
+					textAlign: "center",
+					fontFamily: "Astrological",
+					marginRight: 10,
+					marginBottom: 10
+				};
+				return (
+					<div style={inputStyle}>
+							<div style={titleStyle}>Spheres</div>
+								<button style={buttonStyle} onClick={() => this.props.inputHandler("Sphere of the Premum Mobile")}>9</button>
+								<button style={buttonStyle} onClick={() => this.props.inputHandler("Sphere of the Fixed Stars")}>8</button>
+								<button style={buttonStyle} onClick={() => this.props.inputHandler("Sphere of Saturn")}>6</button>
+								<button style={buttonStyle} onClick={() => this.props.inputHandler("Sphere of Daath")}>7</button>
+								<button style={buttonStyle} onClick={() => this.props.inputHandler("Sphere of Jupiter")}>5</button>
+								<button style={buttonStyle} onClick={() => this.props.inputHandler("Sphere of Mars")}>4</button>
+								<button style={buttonStyle} onClick={() => this.props.inputHandler("Sphere of the Sun")}>}</button>
+								<button style={buttonStyle} onClick={() => this.props.inputHandler("Sphere of Venus")}>2</button>
+								<button style={buttonStyle} onClick={() => this.props.inputHandler("Sphere of Mercury")}>1</button>
+								<button style={buttonStyle} onClick={() => this.props.inputHandler("Sphere of Luna")}>~</button>
+								<button style={buttonStyle} onClick={() => this.props.inputHandler("Sphere of the Elements")}>y</button>
+							<div style={titleStyle}>Elements</div>
+								<button style={buttonStyle} onClick={() => this.props.inputHandler("Air")}>q</button>
+								<button style={buttonStyle} onClick={() => this.props.inputHandler("Water")}>w</button>							
+								<button style={buttonStyle} onClick={() => this.props.inputHandler("Fire")}>e</button>
+							<div style={titleStyle}>Paths</div>
+								<button style={buttonStyle} onClick={() => this.props.inputHandler("Mercury")}>1</button>
+								<button style={buttonStyle} onClick={() => this.props.inputHandler("Luna")}>~</button>
+								<button style={buttonStyle} onClick={() => this.props.inputHandler("Venus")}>2</button>
+								<button style={buttonStyle} onClick={() => this.props.inputHandler("Aries")}>!</button>
+								<button style={buttonStyle} onClick={() => this.props.inputHandler("Taurus")}>=</button>
+								<button style={buttonStyle} onClick={() => this.props.inputHandler("Gemini")}>#</button>
+								<button style={buttonStyle} onClick={() => this.props.inputHandler("Cancer")}>$</button>
+								<button style={buttonStyle} onClick={() => this.props.inputHandler("Leo")}>%</button>
+								<button style={buttonStyle} onClick={() => this.props.inputHandler("Virgo")}>^</button>
+								<button style={buttonStyle} onClick={() => this.props.inputHandler("Jupiter")}>5</button>
+								<button style={buttonStyle} onClick={() => this.props.inputHandler("Libra")}>&</button>							
+								<button style={buttonStyle} onClick={() => this.props.inputHandler("Scorpio")}>*</button>
+								<button style={buttonStyle} onClick={() => this.props.inputHandler("Sagittarius")}>(</button>
+								<button style={buttonStyle} onClick={() => this.props.inputHandler("Capricorn")}>)</button>
+								<button style={buttonStyle} onClick={() => this.props.inputHandler("Mars")}>4</button>
+								<button style={buttonStyle} onClick={() => this.props.inputHandler("Aquarius")}>_</button>
+								<button style={buttonStyle} onClick={() => this.props.inputHandler("Pisces")}>+</button>
+								<button style={buttonStyle} onClick={() => this.props.inputHandler("Sol")}>}</button>							
+								<button style={buttonStyle} onClick={() => this.props.inputHandler("Saturn")}>6</button>
+								<button style={buttonStyle} onClick={() => this.props.inputHandler("Spirit")}>t</button>
+								<button style={buttonStyle} onClick={() => this.props.inputHandler("Earth")}>y</button>
+						</div>
 				);
 			}
 		});
