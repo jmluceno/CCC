@@ -381,7 +381,7 @@ var data = {
 					},
 					{
 						scale: "Emperor",
-						c: "#f23200",
+						c: "#f5ac1c",
 						colorName: "Brilliant flame"
 					},
 					{

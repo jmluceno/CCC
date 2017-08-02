@@ -133,7 +133,7 @@
 			
 			render: function() {
 				var outputStyle = {
-					height: 280, 
+					height: 300, 
 					width: "100%"
 					
 				};
@@ -334,36 +334,31 @@
 				});
 			}, //end fleckIt
 			
-			rayIt: function(rayColor) {
+			rayIt: function(rayColor) {//written by Scott Wilde
 				
-				var points = [];
 				var ctx = this.refs.canvas.getContext('2d');
-				
-				var angle = 0,
-					minRadius = 40,
-					maxRadius = 70;
-				
-				while (angle < (Math.PI * 2)) {
-					var radius = Math.floor(Math.random() * (maxRadius - minRadius) + minRadius);
-					var point = {
-						x: Math.cos(angle) * radius + 50,
-						y: Math.sin(angle) * radius + 50
-					}
-					points.push(point);
-					angle += ((Math.PI * 2) / 20);
-				}
-				
-				//draw lines to the points
+				var center = {x:this.refs.canvas.width/2, y: this.refs.canvas.height/2};
+				var rayCount = 12;
+				var arcLength = ((Math.PI * 2) / rayCount) * (1/3);
+				var radius = Math.max(this.refs.canvas.width, this.refs.canvas.height);
 				ctx.beginPath();
+				ctx.moveTo(center.x, center.y);
+				for (var j = 0; j < rayCount; j++) {
+					var a0 = ((Math.PI * 2) / rayCount) * j - arcLength / 2;
+					var a1 = a0 + arcLength;
+					var x0 = Math.cos(a0) * radius + center.x;
+					var y0 = Math.sin(a0) * radius + center.y;
+					var x1 = Math.cos(a1) * radius + center.x;
+					var y1 = Math.sin(a1) * radius + center.y;
+					ctx.lineTo(x0, y0);
+					ctx.lineTo(x1, y1);
+					ctx.lineTo(center.x, center.y);
+				}
+				ctx.closePath();
+
+				ctx.fillStyle = rayColor;
+				ctx.fill();
 				
-				points.forEach(point => {
-					ctx.moveTo(50, 50);
-					ctx.lineTo(point.x, point.y);
-					ctx.lineWidth = 2;
-					ctx.strokeStyle = rayColor;
-					ctx.stroke();
-					
-				});
 			},
 			
 			prismaticIt: function(prismaticColors) {
