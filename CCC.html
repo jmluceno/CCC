@@ -442,7 +442,49 @@
 		
 		var BottomText = React.createClass({
 			render: function() {
-				var text = this.props.largeDisplayColors.colorName;
+				var colorData = this.props.largeDisplayColors;
+				var text = colorData.colorName;
+				var fontSizeX = "1.25em";
+				var colorCode = "";
+				if (colorData.c) {
+					colorCode = " (" + colorData.c;
+				}
+				if (colorData.quartered && colorData.flecked) {
+					colorCode += "(";
+					for (var i = 0; i < colorData.quartered.length; i++) {
+						colorCode += colorData.quartered[i] + ", ";
+					}
+					colorCode += colorData.flecked + ")";
+				} else if (colorData.quartered) {
+					colorCode += "(";
+					for (var i = 0; i < colorData.quartered.length; i++) {
+						colorCode += colorData.quartered[i];
+						if (i < 3) { colorCode += ", "; }
+					}
+					colorCode += ")";
+				} else if (colorData.flecked) {
+					for (var i = 0; i < colorData.flecked.length; i++) {
+						colorCode += ", " + colorData.flecked[i];
+					}
+					colorCode += ")";
+				} else if (colorData.prismatic) {
+					colorCode += "(";
+					for (var i = 0; i < colorData.prismatic.length; i++) {
+						colorCode += colorData.prismatic[i];
+						if (i != colorData.prismatic.length - 1) {
+							colorCode += ", ";
+						}
+					}
+					colorCode += ")";
+					fontSizeX = "1em";
+				} else if (colorData.rayed) {
+					colorCode += ", " + colorData.rayed + ") ";
+				} else if (colorData.merging) {
+					colorCode += "(" + colorData.merging[0] + ", " + colorData.merging[1] + ")";
+				} else {
+					colorCode += ")";
+				}
+				
 				var bottomTextStyle = {
 					width: "100%",
 					backgroundColor: "#000",
@@ -451,7 +493,7 @@
 					fontSize: 28,
 					height: "63px",
 					display: "table",
-					fontSize: "1.5em",
+					fontSize: fontSizeX,
 					borderBottomRightRadius: 10,
 					borderBottomLeftRadius: 10
 				};
@@ -461,7 +503,7 @@
 				};
 				return(
 					<div style={bottomTextStyle}>
-						<div style={tableStyle}>{text}</div>
+						<div style={tableStyle}>{text}<br/>{colorCode}</div>
 					</div>
 				);
 			}
