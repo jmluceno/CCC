@@ -41,18 +41,30 @@
 		var App = React.createClass({
 			getInitialState: function() {
 				return {
-					symbol: "Cabalistic Color Coordinator"
+					symbol: "Cabalistic Color Coordinator",
+					largeDisplay: false,
+					headScale: '',
+					largeDisplayColors: {}
 				};
+			},
+			switchToLargeDisplay : function(colorDataObject) {
+				if (colorDataObject.colorName != '') {
+					var scale = colorDataObject.scale;
+					this.setState({largeDisplay: true});
+					this.setState({headScale: scale});
+					this.setState({largeDisplayColors: colorDataObject});
+				}
+			},
+			switchToRegularDisplay : function(colorDataObject) {
+				this.setState({largeDisplay: false});
+				this.setState({headScale: ''});
 			},
 			changeSymbol: function(value) {
 				this.setState({
 					symbol: value,
 					bkgdClr: "#fff"
 				});
-				var canvas = this.refs.appCanvas;
-				var ctx = canvas.getContext('2d');				 
-				ctx.fillStyle = "#FFF";
-				ctx.fillRect(0,0, canvas.width, canvas.height);
+				
 			},
 			
 			canvasDraw: {
@@ -88,7 +100,7 @@
 					var maxRadius = 1.5;
 					var minRadius = 1;
 
-					//draw 5000 flecks at 5000 random points in the box
+					//draw flecks at random points in the box
 					for (var i = 0; i < canvas.width * 2; i++) {
 
 						// create the fleck and assign center point
@@ -202,33 +214,20 @@
 			},
 			
 			render: function() {
-				var containerStyle = {
-					position: "relative",
-					width: 500,
-					margin: "0 auto 0 auto"
-
-				};				
+								
 				var appStyle = {
 					width: 500,
 					border: "5px solid black",
 					borderRadius: 20,
-					position: "absolute",
-					top: 0,
-					left: -5
+					margin: "0 auto 0 auto"
 				};					
-				var appCanvasStyle = {
-					marginTop: 68,
-					borderBottomRightRadius: 10,
-					borderBottomLeftRadius: 10
-				}
-				return(
-					<div style={containerStyle}>
-						<canvas ref="appCanvas" id="appCanvas" height={689} width={500} style={appCanvasStyle}/>
-						<div style={appStyle}>		
-							<Output symbol={this.state.symbol} backgroundHandler={this.changeCanvas} canvasHandler={this.changeCanvas}/>
-							<Input inputHandler={this.changeSymbol}/>
-						</div>
-					</div>
+				
+
+				return(					
+					<div style={appStyle}>		
+						<Output symbol={this.state.symbol} changeCanvas={this.changeCanvas} largeDisplay={this.state.largeDisplay} switchToLargeDisplay = {this.switchToLargeDisplay} largeDisplay={this.state.largeDisplay} headScale={this.state.headScale} largeDisplayColors={this.state.largeDisplayColors} switchToRegularDisplay={this.switchToRegularDisplay}/>
+						<Input inputHandler={this.changeSymbol} largeDisplay={this.state.largeDisplay} />
+					</div>					
 				);
 			}
 		});
@@ -238,50 +237,68 @@
 			render: function() {
 				var outputStyle = {
 					height: 300, 
-					width: "100%"
-					
-				};
-				return(
-					<div style={outputStyle}>
-						<TitleBox symbol={this.props.symbol}/>
-						<ColorBoxParent symbol={this.props.symbol} backgroundHandler={this.props.backgroundHandler} canvasHandler={this.props.canvasHandler}/>
-					</div>
-				);
+					width: "100%"					
+				};				
+				
+				if (this.props.largeDisplay) {
+					return(
+						<div style={outputStyle}>
+							<TitleBox symbol={this.props.symbol} headScale={this.props.headScale}/>
+							<LargeCanvas largeDisplayColors={this.props.largeDisplayColors} changeCanvas={this.props.changeCanvas} switchToRegularDisplay={this.props.switchToRegularDisplay} />
+							<BottomText largeDisplayColors={this.props.largeDisplayColors}/>
+						</div>
+					);
+				} else {
+					return (
+					<div style={outputStyle}><TitleBox symbol={this.props.symbol} headScale={this.props.headScale}/>
+						<ColorBoxParent symbol={this.props.symbol} changeCanvas={this.props.changeCanvas} switchToLargeDisplay = {this.props.switchToLargeDisplay} largeDisplay={this.props.largeDisplay} /></div>
+					);
+				}
+				
 			}
 		});
 		
 		var TitleBox = React.createClass({
 			render: function() {
+				
 				var titleBoxStyle = {
 					width: "100%",
 					backgroundColor: "#000",
 					color: "#FFF",
 					textAlign: "center",
 					fontSize: 28,
-					paddingTop: 15,
-					paddingBottom: 15,
 					textTransform: "uppercase",
 					borderTopRightRadius: 10,
-					borderTopLeftRadius: 10
+					borderTopLeftRadius: 10,
+					display: "table",
+					height: "63px"
 				};
-				return (<div style={titleBoxStyle}>{this.props.symbol}</div>);
+				var tableStyle = {
+					display: "table-cell",
+					verticalAlign: "middle"
+				};
+				
+				return (<div style={titleBoxStyle}><div style={tableStyle}>{this.props.symbol}</div></div>);
 			}
 		});
-		
-		
-		
+				
 		var ColorBoxParent = React.createClass({
 			render: function() {
 				var symbol = this.props.symbol;
-				var backgroundHandler = this.props.backgroundHandler;
-				var canvasHandler = this.props.canvasHandler;
+				var changeCanvas = this.props.changeCanvas;
+				var switchToLargeDisplay = this.props.switchToLargeDisplay;
+				var visibilityType = "visible";
+				if (this.props.largeDisplay) {
+					visibilityType = "hidden";
+				}
 				var colorBoxParentStyle = {
 					width: "100%",
 					paddingLeft: 18,
-					paddingTop: 10
+					paddingTop: 10,
+					visibility: visibilityType
 				}
 				var boxes = data[symbol].map(function(colorDataObject){
-					return(<ColorBox data={colorDataObject} backgroundHandler={backgroundHandler} canvasHandler={canvasHandler}/>);
+					return(<ColorBox data={colorDataObject} changeCanvas={changeCanvas} switchToLargeDisplay = {switchToLargeDisplay}/>);
 				});
 				return (
 					<div style={colorBoxParentStyle}>{boxes}</div>
@@ -292,7 +309,6 @@
 		var ColorBox = React.createClass({			
 			render: function() {
 				var colorDataObject = this.props.data;
-				var backgroundHandler = this.props.backgroundHandler;
 				var canvasBox;
 				var colorBoxStyle = {
 					width: 100,
@@ -302,7 +318,7 @@
 				return (
 					<div style={colorBoxStyle}>
 						<ScaleName name={colorDataObject.scale}/>
-						<MakeCanvasBox colorData={colorDataObject} backgroundHandler={backgroundHandler} canvasHandler={this.props.canvasHandler}/>
+						<MakeCanvasBox colorData={colorDataObject} changeCanvas={this.props.changeCanvas} switchToLargeDisplay = {this.props.switchToLargeDisplay}/>
 						<ColorName name={colorDataObject.colorName}/>
 					</div>
 				);
@@ -327,18 +343,18 @@
 		
 		var MakeCanvasBox = React.createClass({
 			componentDidMount: function () {
-				var canvasHandler = this.props.canvasHandler;
+				var changeCanvas = this.props.changeCanvas;
 				var canvas = this.refs.canvas;
-				canvasHandler(canvas, this.props.colorData);
+				changeCanvas(canvas, this.props.colorData);
 				return true;
 			},
 			componentDidUpdate: function () {
-				var canvasHandler = this.props.canvasHandler;
+				var changeCanvas = this.props.changeCanvas;
 				var canvas = this.refs.canvas;
-				canvasHandler(canvas, this.props.colorData);
+				changeCanvas(canvas, this.props.colorData);
 			},				
 			render: function() {
-				var backgroundHandler = this.props.backgroundHandler;
+				var switchToLargeDisplay = this.props.switchToLargeDisplay;
 				var colorData = this.props.colorData;
 				
 				var boxStyle = {
@@ -347,11 +363,10 @@
 					border: "2px solid black",
 					marginBottom: 10
 				};
-				
-				var canvas = document.getElementById("appCanvas");				
+							
 				return (
 					<div style={boxStyle}>
-						<canvas ref="canvas" width={100} height={100} onClick={() => backgroundHandler(canvas, colorData)}/>
+						<canvas ref="canvas" width={100} height={100} onClick={() => this.props.switchToLargeDisplay(colorData)} />
 					</div>
 				);
 			}
@@ -371,12 +386,73 @@
 				);
 			}
 		});
+		var LargeCanvas = React.createClass({
+			getInitialState: function() {
+				return {
+					canvasHeight: 500,
+					canvasWidth: 500
+				};
+			},
+			componentDidMount: function () {
+				var changeCanvas = this.props.changeCanvas;
+				var canvas = this.refs.largeCanvas;
+				var colors = this.props.largeDisplayColors;
+				canvas.style.width='100%';
+				canvas.style.height='100%';
+				canvas.width  = canvas.offsetWidth;
+				canvas.height = canvas.offsetHeight;
+				changeCanvas(canvas, colors);
+				return true;
+			},
+			render: function() {				
+				var canvasContainerStyle = {
+					height: 630
+				}
+				return(
+					<div id="canvasContainer" style={canvasContainerStyle}>
+						<canvas ref="largeCanvas" onClick={() => this.props.switchToRegularDisplay()}/>
+					</div>
+				);
+			}
+		});
 		
+		var BottomText = React.createClass({
+			render: function() {
+				var text = this.props.largeDisplayColors.scale + ": " + this.props.largeDisplayColors.colorName;
+				var bottomTextStyle = {
+					width: "100%",
+					backgroundColor: "#000",
+					color: "#FFF",
+					textAlign: "center",
+					fontSize: 28,
+					height: "63px",
+					display: "table",
+					fontSize: "1.5em",
+					borderBottomRightRadius: 10,
+					borderBottomLeftRadius: 10
+				};
+				var tableStyle = {
+					display: "table-cell",
+					verticalAlign: "middle"
+				};
+				return(
+					<div style={bottomTextStyle}>
+						<div style={tableStyle}>{text}</div>
+					</div>
+				);
+			}
+		});		
 		var Input = React.createClass({
+			
 			render() {
+				var visibilityType = "visible";
+				if (this.props.largeDisplay) {
+					visibilityType = "hidden";
+				}
 				var inputStyle = {
 					float: "none",
-					margin: 10
+					margin: 10,
+					visibility: visibilityType
 				};
 				
 				var titleStyle = {
